@@ -1,5 +1,10 @@
 # docker-manage
-A small bash script to handle docker containers
+
+REMEMBER: THIS SCRIPT DESTROY ALL CONTAINERS ON YOUR DOCKER BEFORE READDING. IF YOU DONT WANT THAT REMOVE IT IN THE CODE. I TAKE NO RESPONSIBILITY.
+
+A small bash script to handle docker containers. Its quite handy when you have one folder named docker-compose / compose or whatever you want, then have one sub directory for each docker-compmpose.yml - this script first delete all old images from the docker system (assumes all is started through the compose files. NO NOT USE IF NOT), then jump into each folder, check for anything to pull, then start. It tries to start it a few times as sometimes it dont start on the first try). If its any port or IP conflict it try to figure out what is stopping it.
+
+It got some parameters like log state and operation mode (one just for testing etc). 
 
 In general a very basic script that is half-working. It does the following
 
