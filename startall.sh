@@ -92,10 +92,18 @@ case "$mode" in
 
         # Find all subdirectories containing docker-compose.yml files
         find . -type f -name "docker-compose.yml" | while read -r file; do
-            echo "Processing directory: $(dirname "$file")"
+            directory="$(dirname "$file")"
+
+            # Check if a file named "ignore" exists in the directory
+            if [ -e "$directory/ignore" ]; then
+                echo "Skipping directory $directory because it contains an 'ignore' file."
+                continue
+            fi
+
+            echo "Processing directory: $directory"
 
             # Change to the directory containing docker-compose.yml if it exists
-            if change_to_directory "$(dirname "$file")"; then
+            if change_to_directory "$directory"; then
                 # Stop, remove containers, and clean up
                 stop_remove_and_clean
 
